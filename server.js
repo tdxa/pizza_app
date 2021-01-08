@@ -5,12 +5,15 @@ const path = require('path')
 
 const app = express();
 
+
+// Assets
+app.use(express.static('public'))
 app.get('/', (req,res)=> {
     res.render('home')
 })
 
 app.use(expressLayout);
-app.set('views', path.join(__dirname,'/resources/views'))
+app.set('views', path.join(__dirname,'/src/views'))
 app.set('view engine','ejs')
 
 const port = process.env.PORT || 3000;
