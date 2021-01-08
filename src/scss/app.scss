@@ -1,4 +1,11 @@
-$primary: blue;
+@import './variables';
+
+
 body{
-    background: $primary;
+    color: $primary;
+    background: $dark;
+}
+
+nav li a:hover{
+    color: $primary-hover;
 }
