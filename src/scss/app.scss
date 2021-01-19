@@ -9,3 +9,20 @@ body{
 nav li a:hover{
     color: $primary-hover;
 }
+
+nav li a{
+    transition: $smooth;
+}
+
+// nav li:last-child a {
+//     background: $primary;
+// }
+
+#logo{
+    width: 50px;
+    height: 50px;
+}
+
+section.hero{
+    background: $secondary
+}
