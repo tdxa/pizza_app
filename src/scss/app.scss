@@ -4,7 +4,6 @@
 body{
     color: $primary;
     background: $dark;
-    height:4000px;
 }
 
 nav li a:hover{
@@ -35,6 +34,7 @@ section.hero{
 .add-to-cart{
     border: 2px solid $primary;
     color: $primary;
+    transition: $smooth;
 }
 
 .add-to-cart:hover{
@@ -43,3 +43,21 @@ section.hero{
     border-color: $pure;
     color: $pure;
 }
+
+.btn-primary{
+    background: $primary;
+    transition: $smooth;
+}
+
+.btn-primary:hover{
+    transition: $smooth;
+    background: $primary-hover;
+}
+
+section.cart{
+    background: $secondary;
+    .amount{
+        color: red;
+    }
+}
+

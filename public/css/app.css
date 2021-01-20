@@ -27,6 +27,7 @@ section.hero {
 .add-to-cart {
   border: 2px solid #4b4bc0;
   color: #4b4bc0;
+  transition: all 0.3 ease-in-out;
 }
 
 .add-to-cart:hover {
@@ -34,5 +35,23 @@ section.hero {
   background: #4b4bc0;
   border-color: white;
   color: white;
+}
+
+.btn-primary {
+  background: #4b4bc0;
+  transition: all 0.3 ease-in-out;
+}
+
+.btn-primary:hover {
+  transition: all 0.3 ease-in-out;
+  background: #1f1f79;
+}
+
+section.cart {
+  background: #cacaf1;
+}
+
+section.cart .amount {
+  color: red;
 }
 
