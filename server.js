@@ -22,5 +22,13 @@ app.get('/cart', (req,res)=>{
     res.render('customers/cart')
 })
 
+app.get('/login', (req,res)=>{
+    res.render('auth/login')
+})
+
+app.get('/register', (req,res)=>{
+    res.render('auth/register')
+})
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Example app listening on ${port} port!`));
