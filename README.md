@@ -29,5 +29,11 @@ I'm currently working on an application for ordering pizza and tracking your ord
     - create notifications
 - [ ] Create order controller
 - [ ] Create order view for customer and admin
-- [ ] Create login page with route
-- [ ] Create register page with route
+- [x] Create login page with route
+- [ ] Build login with passport
+- [x] Create register page with route
+- [x] Build register crud
+- [ ] Make order on cart page
+- [ ] Add order functionality
+- [ ] Add order tracker
+

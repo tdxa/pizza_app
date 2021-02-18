@@ -15,7 +15,7 @@ const PizzaSchema = new mongoose.Schema({
     size: {
         type: String,
         required: true
-    },
+    }
 });
 
 const Pizza = mongoose.model('Pizza', PizzaSchema, 'menu');
