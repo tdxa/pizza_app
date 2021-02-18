@@ -125,5 +125,6 @@ dist
 .ionide
 
 keys.js
+.env
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node
