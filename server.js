@@ -7,8 +7,11 @@ const path = require('path')
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash')
+const passport = require('passport');
 const MongoDBStore = require('connect-mongo')(session);
 
+//Passport config
+require('./app/config/passport')(passport);
 
 const app = express();
 exports.app = app;
@@ -19,7 +22,9 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("MongoDB conncted"))
     .catch(err => console.log(err))
 
-
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Session
 let MongoStore = new MongoDBStore({

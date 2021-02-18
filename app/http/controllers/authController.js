@@ -1,11 +1,15 @@
 const User = require("../../models/user")
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 function authController() {
     return {
+
         register(req, res) {
             res.render('auth/register');
         },
+
+
         postRegister(req, res) {
             const { name, email, password, password2 } = req.body;
             let errors = [];
@@ -62,8 +66,19 @@ function authController() {
             }
         },
 
+
         login(req, res) {
             res.render('auth/login');
+        },
+
+
+        postLogin(req, res, next) {
+            passport.authenticate('local',
+            {
+                successRedirect: '/',
+                failureRedirect: '/auth/login',
+                failureFlash: true
+            })(req, res, next)
         }
     }
 }
