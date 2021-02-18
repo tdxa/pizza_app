@@ -1,5 +1,6 @@
 @import './variables';
-
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
 
 body{
     color: $primary;
@@ -44,6 +45,10 @@ section.hero{
     color: $pure;
 }
 
+.add-to-cart:focus{
+    outline: none;
+}
+
 .btn-primary{
     background: $primary;
     transition: $smooth;
@@ -71,4 +76,8 @@ section.cart{
     &:hover{
         color: $primary-hover;
     }
+}
+
+.noty_theme__mint{
+    padding-left: 8px !important;
 }

@@ -20,7 +20,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 
-//Session
+// Session
 let MongoStore = new MongoDBStore({
     mongooseConnection: mongoose.connection,
     collection: 'sessions'
@@ -37,7 +37,16 @@ app.use(session({
 
 // Assets
 app.use(express.static('public'));
+app.use(express.json())
 
+//Global middleware
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next()
+})
+
+
+// Layout
 app.use(expressLayout);
 app.set('views', path.join(__dirname, '/src/views'))
 app.set('view engine', 'ejs')
