@@ -10,7 +10,7 @@
 I'm currently working on an application for ordering pizza and tracking your order using nodeJS, Express and Passport.
 
 <p align="center">
- <img src="https://media3.giphy.com/media/TrFTekH49d8yY/giphy.gif" alt="gif"/>
+ <img src="https://media3.giphy.com/media/TrFTekH49d8yY/giphy.gif" width=100 alt="gif"/>
 </p>
 
 
@@ -30,7 +30,7 @@ I'm currently working on an application for ordering pizza and tracking your ord
 - [ ] Create order controller
 - [ ] Create order view for customer and admin
 - [x] Create login page with route
-- [ ] Build login with passport
+- [x] Build login with passport
 - [x] Create register page with route
 - [x] Build register crud
 - [ ] Make order on cart page

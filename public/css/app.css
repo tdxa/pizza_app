@@ -298,12 +298,12 @@
 }
 
 body {
-  color: #4b4bc0;
-  background: darkgrey;
+  color: #770d15;
+  background: #D3B786;
 }
 
 nav li a:hover {
-  color: #1f1f79;
+  color: #b4000f;
 }
 
 nav li a {
@@ -316,22 +316,22 @@ nav li a {
 }
 
 section.hero {
-  background: #cacaf1;
+  background: #F9EEC9;
 }
 
 .size {
-  background: #cacaf1;
+  background: #F9EEC9;
 }
 
 .add-to-cart {
-  border: 2px solid #4b4bc0;
-  color: #4b4bc0;
+  border: 2px solid #770d15;
+  color: #770d15;
   transition: all 0.3 ease-in-out;
 }
 
 .add-to-cart:hover {
   transition: all 0.3 ease-in-out;
-  background: #4b4bc0;
+  background: #770d15;
   border-color: white;
   color: white;
 }
@@ -341,17 +341,17 @@ section.hero {
 }
 
 .btn-primary {
-  background: #4b4bc0;
+  background: #770d15;
   transition: all 0.3 ease-in-out;
 }
 
 .btn-primary:hover {
   transition: all 0.3 ease-in-out;
-  background: #1f1f79;
+  background: #b4000f;
 }
 
 section.cart {
-  background: #cacaf1;
+  background: #F9EEC9;
 }
 
 section.cart .amount {
@@ -359,16 +359,16 @@ section.cart .amount {
 }
 
 .login {
-  background: #cacaf1;
+  background: #F9EEC9;
   min-height: calc(100vh-86px);
 }
 
 .login a {
-  color: #4b4bc0;
+  color: #770d15;
 }
 
 .login a:hover {
-  color: #1f1f79;
+  color: #b4000f;
 }
 
 .noty_theme__mint {
