@@ -71,13 +71,21 @@ function authController() {
             res.render('auth/login');
         },
 
+
         postLogin(req, res, next) {
             passport.authenticate('local',
-            {
-                successRedirect: '/',
-                failureRedirect: '/login',
-                failureFlash: true
-            })(req, res, next)
+                {
+                    successRedirect: '/',
+                    failureRedirect: '/login',
+                    failureFlash: true
+                })(req, res, next)
+        },
+
+
+        logout(req, res) {
+            req.logout();
+            req.flash('error', 'You have been successfully logged out!')
+            return res.redirect('/login');
         }
     }
 }

@@ -22,16 +22,12 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("MongoDB conncted"))
     .catch(err => console.log(err))
 
-//Passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Session
 let MongoStore = new MongoDBStore({
     mongooseConnection: mongoose.connection,
     collection: 'sessions'
 })
-
 
 app.use(session({
     secret: process.env.COOKIE_SECRET,
@@ -40,6 +36,13 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 } //24hours
 }));
+
+
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 app.use(flash())
 // Assets
@@ -50,6 +53,7 @@ app.use(express.json())
 //Global middleware
 app.use((req, res, next) => {
     res.locals.session = req.session;
+    res.locals.user = req.user;
     next()
 })
 
