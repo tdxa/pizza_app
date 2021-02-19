@@ -71,12 +71,11 @@ function authController() {
             res.render('auth/login');
         },
 
-
         postLogin(req, res, next) {
             passport.authenticate('local',
             {
                 successRedirect: '/',
-                failureRedirect: '/auth/login',
+                failureRedirect: '/login',
                 failureFlash: true
             })(req, res, next)
         }
