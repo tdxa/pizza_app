@@ -336,7 +336,7 @@ section.hero {
   color: white;
 }
 
-.add-to-cart:focus {
+.add-to-cartfocus {
   outline: none;
 }
 
@@ -373,5 +373,9 @@ section.cart .amount {
 
 .noty_theme__mint {
   padding-left: 8px !important;
+}
+
+a.link {
+  color: red;
 }
 

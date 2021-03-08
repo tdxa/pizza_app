@@ -28,7 +28,7 @@ I'm currently working on an application for ordering pizza and tracking your ord
     - send ajax request
     - create notifications
 - [ ] Create order controller
-- [ ] Create order view for customer and admin
+- [ ] Create order view table for customer and admin
 - [x] Create login page with route
 - [x] Build login with passport
 - [x] Create register page with route
@@ -37,3 +37,11 @@ I'm currently working on an application for ordering pizza and tracking your ord
 - [ ] Add order functionality
 - [ ] Add order tracker
 
+<a name="built"></a> 
+# Built with
+- [Node.js](https://nodejs.org/en/)
+- [Express.js](https://expressjs.com)
+- [Passport.js](http://www.passportjs.org)
+- [Moongoose](https://mongoosejs.com)
+- [EJS](https://ejs.co)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)

@@ -36,27 +36,24 @@ section.hero{
     border: 2px solid $primary;
     color: $primary;
     transition: $smooth;
-}
-
-.add-to-cart:hover{
-    transition: $smooth;
-    background: $primary;
-    border-color: $pure;
-    color: $pure;
-}
-
-.add-to-cart:focus{
-    outline: none;
+    &:hover{
+        transition: $smooth;
+        background: $primary;
+        border-color: $pure;
+        color: $pure;
+    }
+    &focus{
+        outline: none;
+    }
 }
 
 .btn-primary{
     background: $primary;
     transition: $smooth;
-}
-
-.btn-primary:hover{
-    transition: $smooth;
-    background: $primary-hover;
+    &:hover{
+        transition: $smooth;
+        background: $primary-hover;
+    }
 }
 
 section.cart{
@@ -69,15 +66,18 @@ section.cart{
 .login{
     background:$secondary;
     min-height: calc(100vh-86px);
-}
-
-.login a{
+    & a{
     color: $primary;
     &:hover{
         color: $primary-hover;
+        }
     }
 }
 
 .noty_theme__mint{
     padding-left: 8px !important;
+}
+
+a.link{
+    color: red;
 }
