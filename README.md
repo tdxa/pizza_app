@@ -10,7 +10,7 @@
 I'm currently working on an application for ordering pizza and tracking your order using nodeJS, Express and Passport.
 
 <p align="center">
- <img src="https://media3.giphy.com/media/TrFTekH49d8yY/giphy.gif" width=100 alt="gif"/>
+ <img src="https://media3.giphy.com/media/TrFTekH49d8yY/giphy.gif" width=400 alt="gif"/>
 </p>
 
 
