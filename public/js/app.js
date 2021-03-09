@@ -5269,6 +5269,52 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./src/js/admin.js":
+/*!*************************!*\
+  !*** ./src/js/admin.js ***!
+  \*************************/
+/*! exports provided: initAdmin */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initAdmin", function() { return initAdmin; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+function initAdmin() {
+  var orderTable = document.querySelector('#orders');
+  console.log('orrrrrrrrrrrrrrr ' + orderTable);
+  var orders = [];
+  var markup;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/admin/orders', {
+    headers: {
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  }).then(function (res) {
+    orders = res.data;
+    markup = generateMarkup(orders);
+    orderTable.innerHTML = markup;
+  })["catch"](function (err) {
+    console.log(err);
+  });
+
+  function renderItems(items) {
+    var orderItems = Object.values(items);
+    return orderItems.map(function (pizza) {
+      return "\n                <p>".concat(pizza.item.name, " - ").concat(pizza.quantity, " pcs </p>\n            ");
+    }).join('');
+  }
+
+  function generateMarkup(orders) {
+    return orders.slice().reverse().map(function (order) {
+      return "\n                <tr>\n                    <td class=\"border px-4 py-2\">\n                        <p>".concat(order._id, "</p>\n                        <div>").concat(renderItems(order.items), "</div>\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.customerId.name, "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.phone, "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.address, "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.date.toLocaleString('en-GB'), "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.status, "\n                    </td>\n                </tr>\n            ");
+    }).join('');
+  }
+}
+
+/***/ }),
+
 /***/ "./src/js/app.js":
 /*!***********************!*\
   !*** ./src/js/app.js ***!
@@ -5282,6 +5328,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
 /* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _admin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin */ "./src/js/admin.js");
+
 
 
 var addToCart = document.querySelectorAll('.add-to-cart');
@@ -5313,6 +5361,7 @@ addToCart.forEach(function (button) {
     updateCart(pizza);
   });
 });
+Object(_admin__WEBPACK_IMPORTED_MODULE_2__["initAdmin"])();
 
 /***/ }),
 
