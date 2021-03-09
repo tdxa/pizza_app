@@ -27,6 +27,7 @@ function orderController() {
         },
         async index(req, res) {
             const orders = await Order.find({ customerId: req.user._id });
+            res.header('Cache-Control', 'no-store, private, no-store')
             return res.render('customers/orders', { orders: orders })
         }
     }

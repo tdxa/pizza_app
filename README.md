@@ -27,8 +27,8 @@ I'm currently working on an application for ordering pizza and tracking your ord
     - session config
     - send ajax request
     - create notifications
-- [ ] Create order controller
-- [ ] Create order view table for customer and admin
+- [x] Create order controller
+- [x] Create order view table for customer and admin
 - [x] Create login page with route
 - [x] Build login with passport
 - [x] Create register page with route

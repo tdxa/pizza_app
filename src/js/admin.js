@@ -55,4 +55,3 @@ export function initAdmin() {
         }).join('');
     }
 }
-

@@ -3,6 +3,11 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 function authController() {
+    const _getRedirectUrl = req => {
+        console.log(req.body)
+        return req.user.role === 'admin' ? '/admin/orders' : '/customers/orders'
+    }
+
     return {
 
         register(req, res) {
@@ -73,11 +78,31 @@ function authController() {
 
 
         postLogin(req, res, next) {
-            passport.authenticate('local',
-                {
-                    successRedirect: '/',
-                    failureRedirect: '/login',
-                    failureFlash: true
+            // passport.authenticate('local',
+            //     {
+            //         successRedirect: _getRedirectUrl(req),
+            //         failureRedirect: '/login',
+            //         failureFlash: true
+            //     })(req, res, next)
+            passport.authenticate('local',(err, user, info) => {
+                    if (err) {
+                        console.log(err)
+                        req.flash('error', info.message)
+                        return next(err)
+                    }
+                    if (!user) {
+                        console.log('ddddd'+info.message)
+                        req.flash('error', info.message)
+                        return res.redirect('/login')
+                    }
+                    req.logIn(user, (err) => {
+                        if (err) {
+                            req.flash('error', info.message)
+                            return next(err)
+                        }
+
+                        return res.redirect(_getRedirectUrl(req))
+                    })
                 })(req, res, next)
         },
 
