@@ -5360,7 +5360,43 @@ addToCart.forEach(function (button) {
     updateCart(pizza);
   });
 });
-Object(_admin__WEBPACK_IMPORTED_MODULE_2__["initAdmin"])();
+Object(_admin__WEBPACK_IMPORTED_MODULE_2__["initAdmin"])(); //Change order status
+
+var statusAll = document.querySelectorAll('.status_line');
+var hiddenInput = document.querySelector('#hiddenInput');
+var order = hiddenInput ? hiddenInput.value : null;
+order = JSON.parse(order);
+var time = document.createElement('small');
+
+function updateStatus(order) {
+  var stepCompleted = true;
+  statusAll.forEach(function (status) {
+    var dataProp = status.dataset.status;
+
+    if (stepCompleted) {
+      status.classList.add('step-completed');
+    }
+
+    if (dataProp === order.status) {
+      stepCompleted = false; //TODO Update time from mongo
+
+      time.innerText = '20:12';
+      status.appendChild(time);
+
+      if (status.nextElementSibling) {
+        status.nextElementSibling.classList.add('step-current');
+      }
+    }
+  });
+}
+
+updateStatus(order); //Socket
+
+var socket = io();
+
+if (order) {
+  socket.emit('join', "order_".concat(order._id));
+}
 
 /***/ }),
 

@@ -3,10 +3,10 @@ require('dotenv').config()
 const express = require('express');
 const ejs = require('ejs');
 const expressLayout = require('express-ejs-layouts');
-const path = require('path')
+const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const flash = require('express-flash')
+const flash = require('express-flash');
 const passport = require('passport');
 const MongoDBStore = require('connect-mongo')(session);
 
@@ -20,14 +20,14 @@ exports.app = app;
 const db = require('./app/config/keys').MongooseURI;
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("MongoDB conncted"))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 
 
-// Session
+//Session
 let MongoStore = new MongoDBStore({
     mongooseConnection: mongoose.connection,
     collection: 'sessions'
-})
+});
 
 app.use(session({
     secret: process.env.COOKIE_SECRET,
@@ -42,31 +42,40 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
 
-
-app.use(flash())
-// Assets
+//Assets
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
+app.use(express.json());
 
 //Global middleware
 app.use((req, res, next) => {
     res.locals.session = req.session;
     res.locals.user = req.user;
     next()
-})
+});
 
 
-// Layout
+//Layout
 app.use(expressLayout);
-app.set('views', path.join(__dirname, '/src/views'))
-app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, '/src/views'));
+app.set('view engine', 'ejs');
 
-// Import routes
+//Import routes
 require('./routes/web')(app);
 
-
-
+//Create server
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Example app listening on ${port} port!`));
+const server = app.listen(port, () => console.log(`Example app listening on ${port} port!`));
+
+//Socket.io
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+    console.log(socket.id)
+    socket.on('join', (orderId) => {
+        console.log(orderId);
+        socket.join(orderId)
+    })
+})

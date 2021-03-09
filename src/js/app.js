@@ -33,3 +33,42 @@ addToCart.forEach((button) => {
 });
 
 initAdmin()
+
+//Change order status
+let statusAll = document.querySelectorAll('.status_line')
+let hiddenInput = document.querySelector('#hiddenInput');
+let order = hiddenInput ? hiddenInput.value : null;
+order = JSON.parse(order)
+let time = document.createElement('small')
+
+
+function updateStatus(order) {
+    let stepCompleted = true;
+    statusAll.forEach((status) => {
+        let dataProp = status.dataset.status;
+
+        if (stepCompleted) {
+            status.classList.add('step-completed');
+        }
+
+        if (dataProp === order.status) {
+            stepCompleted = false;
+            //TODO Update time from mongo
+            time.innerText = '20:12'
+            status.appendChild(time)
+            if (status.nextElementSibling) {
+                status.nextElementSibling.classList.add('step-current')
+            }
+        }
+    });
+}
+
+updateStatus(order);
+
+//Socket
+let socket = io();
+
+if (order) {
+    socket.emit('join', `order_${order._id}`);
+}
+

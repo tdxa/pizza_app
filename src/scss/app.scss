@@ -60,6 +60,9 @@ section.cart {
     }
 }
 
+/* 
+............Login
+*/
 .login {
     background: $secondary;
     min-height: calc(100vh-86px);
@@ -183,6 +186,13 @@ section.status {
 
 .status-box ul li.step-completed span{
     color:gray;
+}
+
+//time
+.status-box ul li small{
+    float:right;
+    font-size: 14px;
+    margin-top: 8px;
 }
 
 /* 

@@ -360,6 +360,10 @@ section.cart .amount {
   color: red;
 }
 
+/* 
+............Login
+*/
+
 .login {
   background: #F9EEC9;
   min-height: calc(100vh-86px);
@@ -478,6 +482,12 @@ section.status {
 
 .status-box ul li.step-completed span {
   color: gray;
+}
+
+.status-box ul li small {
+  float: right;
+  font-size: 14px;
+  margin-top: 8px;
 }
 
 /* 
