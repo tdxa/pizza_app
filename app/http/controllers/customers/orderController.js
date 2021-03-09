@@ -25,6 +25,16 @@ function orderController() {
                 return res.redirect('/cart');
             })
         },
+        async show(req, res) {
+            const order = await Order.findById(req.params.id);
+
+            if (req.user._id.toString() === order.customerId.toString()) {
+                return res.render('customers/orderPreview', { order: order })
+            }
+
+            return res.redirect('/')
+        },
+
         async index(req, res) {
             const orders = await Order.find({ customerId: req.user._id });
             res.header('Cache-Control', 'no-store, private, no-store')

@@ -2,7 +2,6 @@ import axios from 'axios'
 
 export function initAdmin() {
     const orderTable = document.querySelector('#orders');
-    console.log('orrrrrrrrrrrrrrr ' + orderTable)
     let orders = []
     let markup;
 

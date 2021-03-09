@@ -10,6 +10,7 @@ const orderController = require('../app/http/controllers/customers/orderControll
 const guest = require('../app/http/middlewares/guest');
 const auth = require('../app/http/middlewares/auth');
 const admin = require('../app/http/middlewares/admin');
+const order = require('../app/models/order');
 
 
 function initRoutes(app) {
@@ -25,12 +26,14 @@ function initRoutes(app) {
 
     app.get('/cart', cardController().index);
     app.post('/update-cart', cardController().update);
+    
 
-    app.post('/order', auth, orderController().store)
-    app.get('/customers/orders', auth, orderController().index)
+    app.post('/order', auth, orderController().store);
+    app.get('/customers/orders', auth, orderController().index);
+    app.get('/customer/orders/:id', auth, orderController().show);
 
-    app.get('/admin/orders', admin, adminOrderController().index)
-    app.post('/admin/order/status', admin, adminStatusController().update)
+    app.get('/admin/orders', admin, adminOrderController().index);
+    app.post('/admin/order/status', admin, adminStatusController().update);
 }
 
 module.exports = initRoutes;

@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .noty_layout_mixin,
 #noty_layout__centerRight,
 #noty_layout__centerLeft,
@@ -302,12 +304,12 @@ body {
   background: #D3B786;
 }
 
-nav li a:hover {
-  color: #b4000f;
-}
-
 nav li a {
   transition: all 0.3 ease-in-out;
+}
+
+nav li a:hover {
+  color: #b4000f;
 }
 
 #logo {
@@ -376,6 +378,121 @@ section.cart .amount {
 }
 
 a.link {
+  color: red;
+}
+
+/* 
+............Order Preview
+*/
+
+section.status {
+  background: #F9EEC9;
+  min-height: calc(100vh-86px);
+}
+
+.status-box {
+  padding: 60px 0 0;
+}
+
+.status-box ul {
+  margin-left: 84px;
+}
+
+.status-box ul li span {
+  position: relative;
+  padding-left: 20px;
+}
+
+.status-box ul li span:after {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  background: #9f4545;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.status-box ul li span:before {
+  font-family: "Line Awesome Free";
+  font-size: 46px;
+  font-weight: 600;
+  left: -90px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: inherit;
+}
+
+.status-box ul li:nth-child(1) span:before {
+  content: "\F46D";
+}
+
+.status-box ul li:nth-child(2) span:before {
+  content: "\F560";
+}
+
+.status-box ul li:nth-child(3) span:before {
+  content: "\F818";
+}
+
+.status-box ul li:nth-child(4) span:before {
+  content: "\F48B";
+}
+
+.status-box ul li:nth-child(5) span:before {
+  content: "\F581";
+}
+
+.status-box ul li {
+  position: relative;
+}
+
+.status-box ul li:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -6px;
+  width: 2px;
+  height: 100%;
+  background: #D3B786;
+  margin-top: 10px;
+}
+
+.status-box ul li:nth-child(5) span:after {
+  box-shadow: 0 20px 1px 20px #F9EEC9;
+}
+
+/* 
+............Order Preview - step completed
+*/
+
+.status-box ul li.step-completed:before {
+  background: gray;
+}
+
+.status-box ul li.step-completed span:after {
+  background: gray;
+}
+
+.status-box ul li.step-completed span {
+  color: gray;
+}
+
+/* 
+............Order Preview - current status
+*/
+
+.status-box ul li.step-current:before {
+  background: red;
+}
+
+.status-box ul li.step-current span:after {
+  background: redy;
+}
+
+.status-box ul li.step-current span {
   color: red;
 }
 

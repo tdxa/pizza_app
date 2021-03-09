@@ -5284,7 +5284,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function initAdmin() {
   var orderTable = document.querySelector('#orders');
-  console.log('orrrrrrrrrrrrrrr ' + orderTable);
   var orders = [];
   var markup;
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/admin/orders', {

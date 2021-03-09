@@ -1,83 +1,201 @@
 @import './variables';
 @import '~noty/src/noty.scss';
 @import '~noty/src/themes/mint.scss';
-
-body{
+body {
     color: $primary;
     background: $dark;
 }
 
-nav li a:hover{
-    color: $primary-hover;
-}
-
-nav li a{
+nav li a {
     transition: $smooth;
+    &:hover {
+        color: $primary-hover;
+    }
 }
 
 // nav li:last-child a {
 //     background: $primary;
 // }
-
-#logo{
+#logo {
     width: 50px;
     height: 50px;
 }
 
-section.hero{
+section.hero {
     background: $secondary
 }
 
-.size{
+.size {
     background: $secondary;
 }
 
-.add-to-cart{
+.add-to-cart {
     border: 2px solid $primary;
     color: $primary;
     transition: $smooth;
-    &:hover{
+    &:hover {
         transition: $smooth;
         background: $primary;
         border-color: $pure;
         color: $pure;
     }
-    &focus{
+    &focus {
         outline: none;
     }
 }
 
-.btn-primary{
+.btn-primary {
     background: $primary;
     transition: $smooth;
-    &:hover{
+    &:hover {
         transition: $smooth;
         background: $primary-hover;
     }
 }
 
-section.cart{
+section.cart {
     background: $secondary;
-    .amount{
+    .amount {
         color: red;
     }
 }
 
-.login{
-    background:$secondary;
+.login {
+    background: $secondary;
     min-height: calc(100vh-86px);
-    & a{
-    color: $primary;
-    &:hover{
-        color: $primary-hover;
+    & a {
+        color: $primary;
+        &:hover {
+            color: $primary-hover;
         }
     }
 }
 
-.noty_theme__mint{
+.noty_theme__mint {
     padding-left: 8px !important;
 }
 
-a.link{
+a.link {
     color: red;
+}
+
+
+/* 
+............Order Preview
+*/
+section.status {
+    background: $secondary;
+    min-height: calc(100vh-86px);
+}
+
+.status-box {
+    padding: 60px 0 0;
+}
+
+.status-box ul {
+    margin-left: 84px;
+}
+
+.status-box ul li span {
+    position: relative;
+    padding-left: 20px;
+}
+
+//dots next to the order status
+.status-box ul li span:after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    background: $gray;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+//icons next to the orders status
+.status-box ul li span:before {
+    font-family: 'Line Awesome Free';
+    font-size: 46px;
+    font-weight: 600;
+    left: -90px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: inherit;
+}
+
+//order placed
+.status-box ul li:nth-child(1) span:before {
+    content: '\f46d';
+}
+
+//order confirmation
+.status-box ul li:nth-child(2) span:before {
+    content: '\f560';
+}
+
+//preparation
+.status-box ul li:nth-child(3) span:before {
+    content: '\f818';
+}
+
+//out of delivery
+.status-box ul li:nth-child(4) span:before {
+    content: '\f48b';
+}
+
+//done
+.status-box ul li:nth-child(5) span:before {
+    content: '\f581';
+}
+
+.status-box ul li {
+    position: relative;
+}
+
+//lines between icons and dots
+.status-box ul li:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -6px;
+    width: 2px;
+    height: 100%;
+    background: $dark;
+    margin-top: 10px;
+}
+
+.status-box ul li:nth-child(5) span:after {
+    box-shadow: 0 20px 1px 20px $secondary;
+}
+
+/* 
+............Order Preview - step completed
+*/
+.status-box ul li.step-completed:before {
+    background: gray;
+}
+
+.status-box ul li.step-completed span:after{
+    background: gray;
+}
+
+.status-box ul li.step-completed span{
+    color:gray;
+}
+
+/* 
+............Order Preview - current status
+*/
+.status-box ul li.step-current:before {
+    background: red;
+}
+
+.status-box ul li.step-current span:after{
+    background: redy;
+}
+
+.status-box ul li.step-current span{
+    color:red;
 }
