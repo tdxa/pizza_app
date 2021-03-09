@@ -34,7 +34,7 @@ I'm currently working on an application for ordering pizza and tracking your ord
 - [x] Create register page with route
 - [x] Build register crud
 - [ ] Make order on cart page
-- [ ] Add order functionality
+- [x] Add change order status functionality
 - [ ] Add order tracker
 
 <a name="built"></a> 
