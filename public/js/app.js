@@ -5281,8 +5281,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initAdmin", function() { return initAdmin; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_1__);
 
-function initAdmin() {
+
+function initAdmin(socket) {
   var orderTable = document.querySelector('#orders');
   var orders = [];
   var markup;
@@ -5310,6 +5313,18 @@ function initAdmin() {
       return "\n                <tr>\n                    <td class=\"border px-4 py-2\">\n                        <p>".concat(order._id, "</p>\n                        <div>").concat(renderItems(order.items), "</div>\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.customerId.name, "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.phone, "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.address, "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        ").concat(order.date.toLocaleString('en-GB'), "\n                    </td>\n                    <td class=\"border px-4 py-2\">\n                        <div class=\"inline-block relative\">\n                            <form action=\"/admin/order/status\" method=\"POST\">\n                                <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                                <select name=\"status\" onchange=\"this.form.submit()\" class=\"block appearance-none w-full px-4 py-2 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline bg-white border border-gray-400 hover:border-gray-500\">\n                                    <option value=\"order_placed\" ").concat(order.status === 'order_placed' ? 'selected' : '', ">Placed</option> \n                                    <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">Confirmed</option>\n                                    <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">Prepared</option>\n                                    <option value=\"delivered\" ").concat(order.status === 'delivered' ? 'selected' : '', ">Delivered</option>\n                                </select>\n                            </form>\n                        </div>\n                    </td>\n                </tr>\n            ");
     }).join('');
   }
+
+  socket.on('orderPlaced', function (order) {
+    new noty__WEBPACK_IMPORTED_MODULE_1___default.a({
+      type: 'success',
+      timeout: 1000,
+      progressBar: false,
+      text: 'New order!'
+    }).show();
+    orders.push(order);
+    orderTable.innerHTML = '';
+    orderTable.innerHTML = generateMarkup(orders);
+  });
 }
 
 /***/ }),
@@ -5328,6 +5343,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
 /* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _admin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin */ "./src/js/admin.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -5359,8 +5380,7 @@ addToCart.forEach(function (button) {
     var pizza = JSON.parse(button.dataset.pizza);
     updateCart(pizza);
   });
-});
-Object(_admin__WEBPACK_IMPORTED_MODULE_2__["initAdmin"])(); //Change order status
+}); //Change order status
 
 var statusAll = document.querySelectorAll('.status_line');
 var hiddenInput = document.querySelector('#hiddenInput');
@@ -5369,6 +5389,10 @@ order = JSON.parse(order);
 var time = document.createElement('small');
 
 function updateStatus(order) {
+  statusAll.forEach(function (status) {
+    status.classList.remove('step-completed');
+    status.classList.remove('current');
+  });
   var stepCompleted = true;
   statusAll.forEach(function (status) {
     var dataProp = status.dataset.status;
@@ -5393,10 +5417,26 @@ function updateStatus(order) {
 updateStatus(order); //Socket
 
 var socket = io();
+Object(_admin__WEBPACK_IMPORTED_MODULE_2__["initAdmin"])(socket);
 
 if (order) {
   socket.emit('join', "order_".concat(order._id));
 }
+
+var adminSectionPath = window.location.pathname;
+
+if (adminSectionPath.includes('admin')) {
+  socket.emit('join', 'adminRoom');
+}
+
+socket.on('orderUpdated', function () {
+  var updated = _objectSpread({}, order);
+
+  updated.updatedAt = Date.now().toLocaleString('en-GB');
+  updated.status = data.status;
+  updateStatus(updated);
+  console.log(updated);
+});
 
 /***/ }),
 

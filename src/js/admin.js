@@ -1,6 +1,7 @@
 import axios from 'axios'
+import Noty from 'noty'
 
-export function initAdmin() {
+export function initAdmin(socket) {
     const orderTable = document.querySelector('#orders');
     let orders = []
     let markup;
@@ -63,4 +64,16 @@ export function initAdmin() {
             `
         }).join('');
     }
+
+    socket.on('orderPlaced', (order) => {
+        new Noty({
+            type: 'success',
+            timeout: 1000,
+            progressBar: false,
+            text: 'New order!'
+        }).show();
+        orders.push(order)
+        orderTable.innerHTML = ''
+        orderTable.innerHTML = generateMarkup(orders)
+    })
 }

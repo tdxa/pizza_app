@@ -32,7 +32,7 @@ addToCart.forEach((button) => {
     })
 });
 
-initAdmin()
+
 
 //Change order status
 let statusAll = document.querySelectorAll('.status_line')
@@ -43,7 +43,13 @@ let time = document.createElement('small')
 
 
 function updateStatus(order) {
+    statusAll.forEach((status) => {
+        status.classList.remove('step-completed');
+        status.classList.remove('current')
+    })
+
     let stepCompleted = true;
+
     statusAll.forEach((status) => {
         let dataProp = status.dataset.status;
 
@@ -67,8 +73,23 @@ updateStatus(order);
 
 //Socket
 let socket = io();
+initAdmin(socket)
 
 if (order) {
     socket.emit('join', `order_${order._id}`);
 }
+
+let adminSectionPath = window.location.pathname
+if (adminSectionPath.includes('admin')) {
+    socket.emit('join', 'adminRoom')
+}
+
+
+socket.on('orderUpdated', () => {
+    const updated = { ...order }
+    updated.updatedAt = Date.now().toLocaleString('en-GB')
+    updated.status = data.status
+    updateStatus(updated)
+    console.log(updated)
+})
 
